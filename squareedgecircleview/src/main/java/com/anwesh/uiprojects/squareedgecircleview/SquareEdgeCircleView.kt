@@ -190,12 +190,34 @@ class SquareEdgeCircleView(ctx : Context) : View(ctx) {
                 curr = curr.getNext(dir) {
                     dir *= -1
                 }
-                cb()
+                cb(i, scl)
             }
         }
 
         fun startUpdating(cb : () -> Unit) {
             curr.startUpdating(cb)
+        }
+    }
+
+    data class Renderer(var view : SquareEdgeCircleView) {
+
+        private val animator : Animator = Animator(view)
+        private val sec : SquareEdgeCircle = SquareEdgeCircle(0)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            sec.draw(canvas, paint)
+            animator.animate {
+                sec.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            sec.startUpdating {
+                animator.start()
+            }
         }
     }
 }
