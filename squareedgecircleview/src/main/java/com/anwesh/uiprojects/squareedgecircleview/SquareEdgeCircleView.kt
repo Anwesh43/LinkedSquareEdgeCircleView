@@ -17,11 +17,11 @@ val circles : Int = 4
 val scGap : Float = 0.05f
 val scDiv : Double = 0.51
 val strokeFactor : Int = 90
-val sizeFactor : Float = 2.9f
+val sizeFactor : Float = 2.2f
 val foreColor : Int = Color.parseColor("#311B92")
 val backColor : Int = Color.parseColor("#BDBDBD")
-val rFactor : Float = 4f
-val sqFactor : Float = 2f
+val rFactor : Float = 6f
+val sqFactor : Float = 3f
 
 fun Int.inverse() : Float = 1f / this
 fun Float.scaleFactor() : Float = Math.floor(this / scDiv).toFloat()
@@ -44,9 +44,9 @@ fun Canvas.drawEdgeCircle(i : Int, scale : Float, r : Float, position : Float, p
 fun Canvas.drawSquareEdgeCircle(size : Float, scale : Float, paint : Paint) {
     val sqSize : Float = size / sqFactor
     val r : Float = size / rFactor
-    drawRect(-sqSize / 2, -sqSize / 2, sqSize / 2, sqSize / 2, paint)
+    drawRect(-sqSize, -sqSize, sqSize, sqSize, paint)
     for (j in 0..(circles - 1)) {
-        drawEdgeCircle(j, scale, r, sqSize / 2, paint)
+        drawEdgeCircle(j, scale, r, sqSize + r, paint)
     }
 }
 
