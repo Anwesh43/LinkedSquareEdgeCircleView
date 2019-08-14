@@ -220,4 +220,13 @@ class SquareEdgeCircleView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : SquareEdgeCircleView {
+            val view : SquareEdgeCircleView = SquareEdgeCircleView(activity)
+            activity.setContentView(view)
+            return view 
+        }
+    }
 }
