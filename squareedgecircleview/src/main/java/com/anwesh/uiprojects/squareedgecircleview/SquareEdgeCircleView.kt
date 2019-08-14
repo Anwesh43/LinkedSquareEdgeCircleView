@@ -171,7 +171,31 @@ class SquareEdgeCircleView(ctx : Context) : View(ctx) {
                 return curr
             }
             cb()
-            return this 
+            return this
+        }
+    }
+
+    data class SquareEdgeCircle(var i : Int) {
+
+        private val root : SECNode = SECNode(0)
+        private var curr : SECNode = root
+        private var dir : Int = 1
+
+        fun draw(canvas : Canvas, paint : Paint) {
+            root.draw(canvas, paint)
+        }
+
+        fun update(cb : (Int, Float) -> Unit) {
+            curr.update {i, scl ->
+                curr = curr.getNext(dir) {
+                    dir *= -1
+                }
+                cb()
+            }
+        }
+
+        fun startUpdating(cb : () -> Unit) {
+            curr.startUpdating(cb)
         }
     }
 }
